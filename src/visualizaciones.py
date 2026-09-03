@@ -115,6 +115,29 @@ def graficar_curvas_densidad_churn(
         axes[indice].set_xlabel(etiqueta_x)
         axes[indice].set_ylabel("Densidad")
 
+        figura_individual, eje_individual = plt.subplots(figsize=(8, 6))
+        sns.kdeplot(
+            data=datos,
+            x=variable,
+            hue="Churn",
+            fill=True,
+            palette=["#4C72B0", "#C44E52"],
+            common_norm=False,
+            multiple="layer",
+            alpha=0.45,
+            ax=eje_individual
+        )
+        eje_individual.set_title(titulo)
+        eje_individual.set_xlabel(etiqueta_x)
+        eje_individual.set_ylabel("Densidad")
+        nombre_individual = f"curva_densidad_{variable}.png"
+        figura_individual.savefig(
+            Path(ruta_salida).parent / nombre_individual,
+            dpi=300,
+            bbox_inches="tight"
+        )
+        plt.close(figura_individual)
+
     axes[3].set_visible(False)
     fig.subplots_adjust(wspace=0.3, hspace=0.35, top=0.88)
 

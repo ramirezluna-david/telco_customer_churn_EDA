@@ -27,7 +27,7 @@ Dado que aún no se implementará el modelo predictivo, el éxito de esta primer
 - Generar un reportes con al menos 5 variables de alto impacto en churn que estén visualmente demostradas.
 
 # Descripción de las fuentes de datos utilizadas.
-El conjunto de datos contiene información sobre los clientes de una empresa de telecomunicaciones y si se dieron de baja (cancelaron su servicio) o no. Cada fila representa a un cliente, cada columna contiene los atributos del cliente descritos en los metadatos de la columna.
+El conjunto de datos contiene información sobre los clientes de una empresa de telecomunicaciones y si se dieron de baja (cancelaron su servicio) o no. Cada fila representa a un cliente, cada columna contiene los atributos del cliente descritos.
 
 El conjunto de datos incluye información sobre:
 
@@ -36,5 +36,6 @@ El conjunto de datos incluye información sobre:
 - Información de la cuenta del cliente – cuánto tiempo llevan como clientes, contrato, método de pago, facturación electrónica, cargos mensuales y cargos totales.
 - Información demográfica sobre los clientes – género, rango de edad, y si tienen pareja y dependientes.
 
-# Preparación y análisis exploratorio de los datos (EDA).
+# Análisis exploratorio de los datos (EDA).
+# Preparación para modelado
 # Metodología utilizada (CRISP-DM).

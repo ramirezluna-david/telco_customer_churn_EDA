@@ -235,13 +235,14 @@ def _crear_countplot(datos, variable, ax):
         ax.bar_label(container, fmt="%d", padding=3, fontsize=9)
 
 
-def graficar_grupos_categoricos_churn(
+def graficar_grupo_categorico_churn(
     df,
+    nombre_grupo,
     ruta_salida="../resultados/plots"
 ):
-    """Genera visualizaciones categóricas agrupadas según el abandono.
+    """Genera visualizaciones categóricas para un grupo específico según el abandono.
 
-    Para cada grupo de variables se crea una sábana con dos gráficos por fila.
+    Crea una sábana con dos gráficos por fila para las variables del grupo solicitado.
     Además, se guarda un PNG individual por variable. Los títulos y categorías
     se traducen al español, se muestran los conteos sobre las barras y solo el
     gráfico de ``PaymentMethod`` se presenta sin leyenda.
@@ -250,71 +251,83 @@ def graficar_grupos_categoricos_churn(
     ----------
     df : pandas.DataFrame
         DataFrame que contiene las variables categóricas y la columna ``Churn``.
+    nombre_grupo : str
+        Nombre del grupo específico a graficar (debe coincidir con una llave de GRUPOS_CATEGORICOS).
     ruta_salida : str or pathlib.Path, optional
         Directorio donde se guardarán las sábanas y los gráficos individuales.
 
     Returns
     -------
-    list
-        Lista con las figuras agrupadas generadas por cada grupo.
+    matplotlib.figure.Figure
+        La figura que agrupa los gráficos generados para el grupo indicado.
     """
+    # Validación para evitar errores de tipeo al llamar la función en el notebook
+    if nombre_grupo not in GRUPOS_CATEGORICOS:
+        raise ValueError(f"El grupo '{nombre_grupo}' no es válido. Opciones: {list(GRUPOS_CATEGORICOS.keys())}")
+
+    # Extraemos solo las variables del grupo solicitado
+    variables = GRUPOS_CATEGORICOS[nombre_grupo]
+    
     datos = df.copy()
     datos["Churn"] = datos["Churn"].map({"Yes": "Sí", "No": "No"})
     ruta = Path(ruta_salida)
     ruta.mkdir(parents=True, exist_ok=True)
-    figuras = []
 
-    for nombre_grupo, variables in GRUPOS_CATEGORICOS.items():
-        cantidad_filas = (len(variables) + 1) // 2
-        figura_grupo, ejes = plt.subplots(
-            cantidad_filas,
-            2,
-            figsize=(15, 5.2 * cantidad_filas)
-        )
-        ejes = ejes.reshape(-1)
-        figura_grupo.suptitle(
-            f"Distribución de {nombre_grupo} según abandono",
-            fontsize=16,
-            fontweight="bold"
-        )
+    cantidad_filas = (len(variables) + 1) // 2
+    figura_grupo, ejes = plt.subplots(
+        cantidad_filas,
+        2,
+        figsize=(15, 5.2 * cantidad_filas)
+    )
+    ejes = ejes.reshape(-1)
+    
+    figura_grupo.suptitle(
+        f"Distribución de {nombre_grupo} según abandono",
+        fontsize=16,
+        fontweight="bold"
+    )
 
-        for indice, variable in enumerate(variables):
-            _crear_countplot(datos, variable, ejes[indice])
-            if variable == "PaymentMethod":
-                ejes[indice].get_legend().remove()
-            else:
-                ejes[indice].legend(title="Abandono")
+    for indice, variable in enumerate(variables):
+        _crear_countplot(datos, variable, ejes[indice])
+        
+        # Lógica original para ocultar la leyenda únicamente en PaymentMethod
+        if variable == "PaymentMethod":
+            ejes[indice].get_legend().remove()
+        else:
+            ejes[indice].legend(title="Abandono")
 
-            figura_individual, eje_individual = plt.subplots(figsize=(9, 7))
-            _crear_countplot(datos, variable, eje_individual)
-            if variable == "PaymentMethod":
-                eje_individual.get_legend().remove()
-            else:
-                eje_individual.legend(title="Abandono")
+        figura_individual, eje_individual = plt.subplots(figsize=(9, 7))
+        _crear_countplot(datos, variable, eje_individual)
+        
+        if variable == "PaymentMethod":
+            eje_individual.get_legend().remove()
+        else:
+            eje_individual.legend(title="Abandono")
 
-            nombre_individual = f"{_nombre_archivo(nombre_grupo)}_{variable}.png"
-            figura_individual.savefig(
-                ruta / nombre_individual,
-                dpi=300,
-                bbox_inches="tight"
-            )
-            plt.close(figura_individual)
-
-        for eje in ejes[len(variables):]:
-            eje.set_visible(False)
-
-        figura_grupo.subplots_adjust(
-            wspace=0.3,
-            hspace=0.4,
-            top=0.88,
-            bottom=0.1
-        )
-        nombre_grupo_archivo = f"grupo_{_nombre_archivo(nombre_grupo)}.png"
-        figura_grupo.savefig(
-            ruta / nombre_grupo_archivo,
+        nombre_individual = f"{_nombre_archivo(nombre_grupo)}_{variable}.png"
+        figura_individual.savefig(
+            ruta / nombre_individual,
             dpi=300,
             bbox_inches="tight"
         )
-        figuras.append(figura_grupo)
+        plt.close(figura_individual)
 
-    return figuras
+    # Ocultar los ejes sobrantes si la cantidad de variables es impar
+    for eje in ejes[len(variables):]:
+        eje.set_visible(False)
+
+    figura_grupo.subplots_adjust(
+        wspace=0.3,
+        hspace=0.4,
+        top=0.88,
+        bottom=0.1
+    )
+    nombre_grupo_archivo = f"grupo_{_nombre_archivo(nombre_grupo)}.png"
+    figura_grupo.savefig(
+        ruta / nombre_grupo_archivo,
+        dpi=300,
+        bbox_inches="tight"
+    )
+    
+    # Retorna solo la figura generada, en lugar de una lista
+    return figura_grupo

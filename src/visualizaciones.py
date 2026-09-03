@@ -86,7 +86,7 @@ def graficar_curvas_densidad_churn(
     datos["Churn"] = datos["Churn"].map({"Yes": "Sí", "No": "No"})
 
     variables = {
-        "tenure": ("Antigüedad del cliente", "Antigüedad (meses)"),
+        "tenure": ("Antiguedad del cliente", "Antiguedad (meses)"),
         "MonthlyCharges": ("Cargos mensuales", "Cargos mensuales ($)"),
         "TotalCharges": ("Cargos totales", "Cargos totales ($)")
     }

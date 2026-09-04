@@ -38,4 +38,29 @@ El conjunto de datos incluye información sobre:
 
 # Análisis exploratorio de los datos (EDA).
 # Preparación para modelado
+
+# Evaluación de sesgos, aspectos éticos y estándares de privacidad
+
+Impacto de los errores de predicción: Los Falsos Negativos (FN) resultan en la pérdida inevitable de clientes, mientras que los Falsos Positivos (FP) provocan gastos ineficientes en estrategias de retención y marketing.
+
+Sesgo por desbalance de datos: El modelo está desbalanceado. Para hacerlo equitativo con la clase minoritaria (Churn), se requiere aplicar técnicas de re-muestreo exclusivamente sobre el conjunto de entrenamiento.
+
+Solución propuesta (SMOTE): Se recomienda implementar SMOTE para generar datos sintéticos de la clase minoritaria basándose en vecinos cercanos. Esto evita la duplicidad exacta de datos y ayuda al algoritmo a definir mejores fronteras de decisión.
+
+Aspectos eticos y de privacidad:
+
+Exigencias normativas y sanciones regulatorias: Las legislaciones actuales de privacidad (GDPR y Ley 21.719) exigen el consentimiento explícito, protegen el uso de datos sensibles y regulan las decisiones algorítmicas (otorgando derecho a explicación humana). Su incumplimiento conlleva multas severas de hasta el 4% de la facturación anual.
+
+Vulnerabilidad del conjunto de datos: Actualmente, el dataset infringe la normativa al carecer de protección sobre la Información de Identificación Personal (PII), exponiendo directamente el identificador del cliente (CustomerID) junto a su comportamiento financiero y personal.
+
+Medidas de protección y mitigación propuestas: Para cumplir con la ley y garantizar la privacidad, se aplicarán las siguientes estrategias:
+
+Seudonimización (Hashing): Transformar identificadores directos en códigos irreversibles.
+
+Minimización de datos: Utilizar estrictamente las variables necesarias para el modelo, descartando información sensible o redundante.
+
+Gobernanza y seguridad: Implementar Control de Acceso Basado en Roles (RBAC) para restringir el manejo de los datos solo al personal autorizado.
+
+Transparencia: Habilitar canales formales para que los usuarios puedan ejercer sus derechos ARCO+ (Acceso, Rectificación, Cancelación, Oposición y Portabilidad).
+
 # Metodología utilizada (CRISP-DM).

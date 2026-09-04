@@ -38,6 +38,9 @@ El conjunto de datos incluye información sobre:
 
 # Análisis exploratorio de los datos (EDA).
 # Preparación para modelado
+Durante la fase de limpieza y preprocesamiento de datos, las decisiones se centraron en estructurar un conjunto de información pulido para el modelamiento, lo que implicó tratar valores nulos, estandarizar formatos y seleccionar rigurosamente los atributos más relevantes. Para la selección de las variables categóricas, nos apoyamos en la métrica V de Cramer. Es importante destacar que, en el complejo contexto del sector de las telecomunicaciones y el análisis de comportamiento humano, alcanzar una correlación estadística de 0.3 en la V de Cramer se considera un indicador bueno y bastante robusto. Este criterio nos permitió validar matemáticamente y priorizar aquellas características que ejercen un peso predictivo real sobre la decisión de abandono del cliente.
+
+Sin embargo, la depuración del conjunto de datos no se rigió exclusivamente por cortes estadísticos estrictos. Las variables que decidimos no eliminar, a pesar de tener correlaciones matemáticas más discretas, se mantuvieron porque el análisis exploratorio visual demostró su valor empírico. Gráficamente, estas características exhiben distribuciones y patrones que explican y justifican claramente el comportamiento de los usuarios respecto a la variable objetivo "Churn". Un ejemplo clave de esta decisión es la variable "PaperlessBilling"; aunque su puntuación de correlación no sea la más alta del dataset (1.91), los gráficos evidencian una clara separación en las tendencias de retención, demostrando que la adopción de este tipo de facturación está estructuralmente ligada a la propensión de un cliente a abandonar el servicio.
 
 # Evaluación de sesgos, aspectos éticos y estándares de privacidad
 

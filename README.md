@@ -26,17 +26,29 @@ Dado que aún no se implementará el modelo predictivo, el éxito de esta primer
 - Cuantificar la proporción exacta de la clase objetivo para determinar qué técnica de balanceo se requerirá en la siguiente fase.
 - Generar un reportes con al menos 5 variables de alto impacto en churn que estén visualmente demostradas.
 
-# Descripción de las fuentes de datos utilizadas.
-El conjunto de datos contiene información sobre los clientes de una empresa de telecomunicaciones y si se dieron de baja (cancelaron su servicio) o no. Cada fila representa a un cliente, cada columna contiene los atributos del cliente descritos.
+# Descripción General y Calidad del Conjunto de Datos
+El conjunto de datos contiene información sobre los clientes de una empresa de telecomunicaciones y si se dieron de baja (cancelaron su servicio) o no. Cada fila representa a un cliente, cada columna contiene los atributos del cliente descritos. El conjunto de datos original está compuesto por 7043 registros y 21 características.
 
 El conjunto de datos incluye información sobre:
 
-- Clientes que se dieron de baja en el último mes – la columna se llama Churn (tasa de abandono).
-- Servicios a los que cada cliente se ha suscrito – teléfono, múltiples líneas, internet, seguridad en línea, respaldo en línea, protección de dispositivos, soporte técnico y streaming de TV y películas.
-- Información de la cuenta del cliente – cuánto tiempo llevan como clientes, contrato, método de pago, facturación electrónica, cargos mensuales y cargos totales.
-- Información demográfica sobre los clientes – género, rango de edad, y si tienen pareja y dependientes.
+* Clientes que se dieron de baja en el último mes – la columna se llama Churn (tasa de abandono).
+* Servicios a los que cada cliente se ha suscrito – teléfono, múltiples líneas, internet, seguridad en línea, respaldo en línea, protección de dispositivos, soporte técnico y streaming de TV y películas.
+* Información de la cuenta del cliente – cuánto tiempo llevan como clientes, contrato, método de pago, facturación electrónica, cargos mensuales y cargos totales.
+* Información demográfica sobre los clientes – género, rango de edad, y si tienen pareja y dependientes.
+
+* Variables Categóricas: Alta presencia de datos cualitativos estructurados como texto (ej.
+género, tipo de contrato, métodos de pago).
+* Duplicidad: No se han detectado registros duplicados en el conjunto de datos.
+* Completitud: La integridad de los datos es excelente. El único hallazgo de valores nulos se
+presentó en la variable TotalCharges (11 registros faltantes), los cuales corresponden
+estrictamente a clientes con una antigüedad (tenure) de 0 meses.
+* Análisis de Valores Atípicos (Outliers): Se evaluaron las variables numéricas continuas
+mediante el método de Rango Intercuartil (IQR). Los resultados indicaron una ausencia
+total de valores atípicos en las características tenure, MonthlyCharges y
+TotalCharges.
 
 # Análisis exploratorio de los datos (EDA).
+![asdf](../resultados/plots/curva_densidad_MonthlyCharges.png)
 # Preparación para modelado
 
 # Evaluación de sesgos, aspectos éticos y estándares de privacidad

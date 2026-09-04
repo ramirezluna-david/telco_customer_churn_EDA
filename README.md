@@ -6,7 +6,7 @@ Para las empresas de telecomunicaciones, la retención de clientes es un desafí
 Para hacer frente a este problema, el principal desafío analítico debe ser comprender los factores que impulsan las cancelaciones y, sobre todo, predecir qué clientes específicos están en riesgo de abandonar el servicio. Mediante el análisis profundo de los datos y la implementación de modelos predictivos de churn, las empresas de telecomunicaciones pueden anticiparse a las bajas, diseñar estrategias de retención segmentadas y mejorar proactivamente la experiencia del usuario, convirtiendo la fidelización en un motor de crecimiento sostenible.
 
 # Objetivos del proyecto
-### Objetivo general del proyecto:
+#### Objetivo general del proyecto:
 - Desarrollar un modelo de Machine Learning capaz de predecir la probabilidad de que un cliente abandone la empresa, permitiendo al equipo de marketing y retención intervenir de manera proactiva.
 
 ### Objetivos específicos de esta primera fase de exploración:

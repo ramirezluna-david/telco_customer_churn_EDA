@@ -48,7 +48,9 @@ total de valores atípicos en las características tenure, MonthlyCharges y
 TotalCharges.
 
 # Análisis exploratorio de los datos (EDA).
-![asdf](../resultados/plots/curva_densidad_MonthlyCharges.png)
+
+![alt text](resultados/plots/curva_densidad_MonthlyCharges.png)
+
 # Preparación para modelado
 
 # Evaluación de sesgos, aspectos éticos y estándares de privacidad

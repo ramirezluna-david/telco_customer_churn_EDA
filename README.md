@@ -140,3 +140,25 @@ Para cumplir con la ley y garantizar la privacidad, se aplicarán las siguientes
 - Transparencia: Habilitar canales formales para que los usuarios puedan ejercer sus derechos ARCO (Acceso, Rectificación, Cancelación, Oposición y Portabilidad).
 
 # Metodología utilizada (CRISP-DM).
+Para el desarrollo de este proyecto, se adoptó la metodología **CRISP-DM**, garantizando un enfoque estructurado desde la comprensión del problema de negocio hasta la preparación para el despliegue del modelo.
+
+### 1. Comprensión del Negocio (Business Understanding)
+El objetivo principal es predecir la tasa de abandono de clientes (Churn) en una empresa de telecomunicaciones para optimizar las estrategias de retención. Se identificó el impacto financiero de los errores predictivos: los **Falsos Negativos** implican pérdida directa de clientes e ingresos, mientras que los **Falsos Positivos** generan ineficiencia en el presupuesto de marketing. Adicionalmente, se integraron los requisitos éticos y normativos para garantizar la privacidad y el resguardo de datos sensibles desde la concepción del proyecto.
+
+### 2. Comprensión de los Datos (Data Understanding)
+Se realizó un Análisis Exploratorio de Datos (EDA) para identificar los patrones que explican el abandono. Se utilizó la métrica **V de Cramér** para evaluar características categóricas y correlación de Pearson para las numéricas. La selección de variables combinó rigor matemático con evidencia empírica visual; reteniendo variables de menor puntuación matemática debido a que sus distribuciones gráficas demuestran una clara influencia en el comportamiento del usuario.
+
+### 3. Preparación de los Datos (Data Preparation)
+El procesamiento se estructuró mediante pipelines para evitar fugas de información y asegurar consistencia técnica y legal:
+* **Privacidad y Gobernanza:** Se aplicó seudonimización (Hashing criptográfico) al identificador "CustomerID" y minimización de datos, descartando columnas sin peso predictivo justificado.
+* **Limpieza e Imputación:** Automatización del tratamiento de valores nulos e inconsistencias detectadas.
+* **Codificación de Variables:** Implementación de One-Hot Encoding para variables nominales policategóricas, optimizando la interpretación matemática del algoritmo.
+
+### 4. Modelado (Modeling)
+Para mitigar el sesgo introducido por el desbalance de clases, se determinó la aplicación de técnicas de re-muestreo exclusivamente sobre el conjunto de entrenamiento. Se sugirió la técnica **SMOTE** para generar registros sintéticos mediante vecinos cercanos para evitar la duplicidad exacta de datos, permitiendo al algoritmo trazar fronteras de decisión mucho más precisas y equitativas.
+
+### 5. Evaluación (Evaluation)
+La validación del rendimiento no se basa únicamente en la exactitud global, sino en la capacidad del modelo para equilibrar la detección de la clase minoritaria sin disparar los Falsos Positivos. Se priorizan métricas robustas frente a datos desbalanceados para asegurar que las alertas tempranas de abandono sean financieramente viables para la compañía.
+
+### 6. Despliegue (Deployment)
+La arquitectura del proyecto contempla las normativas vigentes para su paso a producción. Esto incluye la necesidad operativa de implementar un Control de Acceso Basado en Roles    para restringir el uso de los datos productivos solo al personal autorizado bajo el principio del menor privilegio, además de garantizar los mecanismos necesarios para la transparencia algorítmica y la atención a los derechos ARCO de los titulares.

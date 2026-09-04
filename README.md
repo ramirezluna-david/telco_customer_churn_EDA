@@ -38,32 +38,58 @@ El conjunto de datos incluye información sobre:
 
 # Análisis exploratorio de los datos (EDA).
 # Preparación para modelado
-Durante la fase de limpieza y preprocesamiento de datos, las decisiones se centraron en estructurar un conjunto de información pulido para el modelamiento, lo que implicó tratar valores nulos, estandarizar formatos y seleccionar rigurosamente los atributos más relevantes. Para la selección de las variables categóricas, nos apoyamos en la métrica V de Cramer. Es importante destacar que, en el complejo contexto del sector de las telecomunicaciones y el análisis de comportamiento humano, alcanzar una correlación estadística de 0.3 en la V de Cramer se considera un indicador bueno y bastante robusto. Este criterio nos permitió validar matemáticamente y priorizar aquellas características que ejercen un peso predictivo real sobre la decisión de abandono del cliente.
 
-Sin embargo, la depuración del conjunto de datos no se rigió exclusivamente por cortes estadísticos estrictos. Las variables que decidimos no eliminar, a pesar de tener correlaciones matemáticas más discretas, se mantuvieron porque el análisis exploratorio visual demostró su valor empírico. Gráficamente, estas características exhiben distribuciones y patrones que explican y justifican claramente el comportamiento de los usuarios respecto a la variable objetivo "Churn". Un ejemplo clave de esta decisión es la variable "PaperlessBilling"; aunque su puntuación de correlación no sea la más alta del dataset (1.91), los gráficos evidencian una clara separación en las tendencias de retención, demostrando que la adopción de este tipo de facturación está estructuralmente ligada a la propensión de un cliente a abandonar el servicio.
-Tabla de correlaciones con la variable objetivo:
+Criterios de selección de variables predictoras
 
-| Variable | Tipo de Variable | Métrica Evaluada | Correlación con Churn |
-| :--- | :--- | :--- | :---: |
-| **Contract** | Categórica | V de Cramér | 0.410 |
-| **tenure** | Numérica | Correlación | -0.350 |
-| **OnlineSecurity** | Categórica | V de Cramér | 0.347 |
-| **TechSupport** | Categórica | V de Cramér | 0.343 |
-| **InternetService** | Categórica | V de Cramér | 0.322 |
-| **PaymentMethod** | Categórica | V de Cramér | 0.303 |
-| **OnlineBackup** | Categórica | V de Cramér | 0.292 |
-| **DeviceProtection** | Categórica | V de Cramér | 0.281 |
-| **StreamingMovies** | Categórica | V de Cramér | 0.230 |
-| **StreamingTV** | Categórica | V de Cramér | 0.230 |
-| **TotalCharges** | Numérica | Correlación | -0.200 |
-| **PaperlessBilling** | Categórica | V de Cramér | 0.191 |
-| **MonthlyCharges** | Numérica | Correlación | 0.190 |
-| **Dependents** | Categórica | V de Cramér | 0.163 |
-| **SeniorCitizen** | Categórica | V de Cramér | 0.150 |
-| **Partner** | Categórica | V de Cramér | 0.150 |
-| **MultipleLines** | Categórica | V de Cramér | 0.036 |
-| **PhoneService** | Categórica | V de Cramér | 0.000 |
-| **gender** | Categórica | V de Cramér | 0.000 |
+
+* Validación Matemática (V de Cramér - Pearson): Se priorizaron las variables categóricas con un puntaje superior a 0.3, un umbral estadístico robusto en el sector de telecomunicaciones para asegurar que la característica tenga un peso predictivo real sobre el abandono.
+
+* Validación Visual: Los cortes estadísticos no fueron absolutos. Variables con baja correlación (como PaperlessBilling, con 0.191) se conservaron porque los gráficos de distribución evidenciaron empíricamente una separación clara en las tendencias de retención, justificando su influencia en el modelo.
+
+
+Transformación de datos en el Pipeline (Imputación y codificación)
+
+
+Para asegurar un flujo de datos limpio, escalable y libre de fugas de información, el preprocesamiento se automatizó mediante pipelines, destacando las siguientes etapas:
+
+* Imputación de Valores Faltantes: Se implementaron transformadores (como SimpleImputer) para manejar de forma automatizada las inconsistencias y valores nulos descubiertos durante la estandarización de formatos.Y KNN para preservar mejor la distribución original de los datos numericos en comparativa con los métodos univariados simples, teniendo en cuenta la reducida cantidad de valores nulos detectados.
+
+* Codificación de Variables Categóricas: Se aplicó One-Hot Encoding para las variables nominales para no generar jerarquías matemáticas falsa. Y StandarScaler para la estandarización simple teniendo en cuenta la ausencia de valores atipico y la diferencia de magnitudes de las variables numericas.
+
+### Tabla de correlaciones con la variable objetivo:
+
+
+* Variables Categóricas
+
+
+| Variable | Correlación (V de Cramér) |
+| :--- | :---: |
+| **Contract** | 0.410 |
+| **OnlineSecurity** | 0.347 |
+| **TechSupport** | 0.343 |
+| **InternetService** | 0.322 |
+| **PaymentMethod** | 0.303 |
+| **OnlineBackup** | 0.292 |
+| **DeviceProtection** | 0.281 |
+| **StreamingMovies** | 0.230 |
+| **StreamingTV** | 0.230 |
+| **PaperlessBilling** | 0.191 |
+| **Dependents** | 0.163 |
+| **SeniorCitizen** | 0.150 |
+| **Partner** | 0.150 |
+| **MultipleLines** | 0.036 |
+| **PhoneService** | 0.000 |
+| **gender** | 0.000 |
+
+
+* Variables Numéricas
+
+
+| Variable | Correlación (Pearson) |
+| :--- | :---: |
+| **tenure** | -0.350 |
+| **TotalCharges** | -0.200 |
+| **MonthlyCharges** | 0.190 |
 
 # Evaluación de sesgos, aspectos éticos y estándares de privacidad
 

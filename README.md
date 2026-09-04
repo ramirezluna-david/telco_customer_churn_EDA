@@ -39,7 +39,7 @@ El conjunto de datos incluye información sobre:
 # Análisis exploratorio de los datos (EDA).
 # Preparación para modelado
 
-Criterios de selección de variables predictoras
+## Criterios de selección de variables predictoras
 
 
 * Validación Matemática (V de Cramér - Pearson): Se priorizaron las variables categóricas con un puntaje superior a 0.3, un umbral estadístico robusto en el sector de telecomunicaciones para asegurar que la característica tenga un peso predictivo real sobre el abandono.
@@ -47,7 +47,7 @@ Criterios de selección de variables predictoras
 * Validación Visual: Los cortes estadísticos no fueron absolutos. Variables con baja correlación (como PaperlessBilling, con 0.191) se conservaron porque los gráficos de distribución evidenciaron empíricamente una separación clara en las tendencias de retención, justificando su influencia en el modelo.
 
 
-Transformación de datos en el Pipeline (Imputación y codificación)
+## Transformación de datos en el Pipeline (Imputación y codificación)
 
 
 Para asegurar un flujo de datos limpio, escalable y libre de fugas de información, el preprocesamiento se automatizó mediante pipelines, destacando las siguientes etapas:

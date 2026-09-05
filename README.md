@@ -81,9 +81,10 @@ TotalCharges.
 
 # Preparación para modelado
 #### Criterios de selección de variables predictoras
-* Validación Matemática (V de Cramér - Pearson): Se priorizaron las variables categóricas con un puntaje superior a 0.3, un umbral estadístico robusto en el sector de telecomunicaciones para asegurar que la característica tenga un peso predictivo real sobre el abandono.
+* Validación Matemática (V de Cramér - Pearson): Para la selección de las variables categóricas, nos apoyamos en la métrica V de Cramer. Es importante destacar que, en el complejo contexto del sector de las telecomunicaciones y el análisis de comportamiento humano, alcanzar una correlación estadística de 0.3 en la V de Cramer se considera un indicador bueno y bastante robusto. Este criterio nos permitió validar matemáticamente y priorizar aquellas características que ejercen un peso predictivo real sobre la decisión de abandono del cliente.
 
-* Validación Visual: Los cortes estadísticos no fueron absolutos. Variables con baja correlación (como PaperlessBilling, con 0.191) se conservaron porque los gráficos de distribución evidenciaron empíricamente una separación clara en las tendencias de retención, justificando su influencia en el modelo.
+* Validación Visual: La depuración del conjunto de datos no se rigió exclusivamente por cortes estadísticos estrictos. Las variables que decidimos no eliminar, a pesar de tener correlaciones matemáticas más discretas, se mantuvieron porque el análisis exploratorio visual demostró su valor empírico. Gráficamente, estas características exhiben distribuciones y patrones que explican y justifican claramente el comportamiento de los usuarios respecto a la variable objetivo "Churn". Un ejemplo clave de esta decisión es la variable "PaperlessBilling"; aunque su puntuación de correlación no sea la más alta del dataset (1.91), los gráficos evidencian una clara separación en las tendencias de retención, demostrando que la adopción de este tipo de facturación está estructuralmente ligada a la propensión de un cliente a abandonar el servicio.
+
 #### Transformación de datos en el Pipeline (Imputación y codificación)
 Para asegurar un flujo de datos limpio, escalable y libre de fugas de información, el preprocesamiento se automatizó mediante pipelines, destacando las siguientes etapas:
 
